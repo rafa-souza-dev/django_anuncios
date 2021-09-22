@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Django Anúncios</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
+    <link
+        rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"
+    >
+</head>
+
+<body>
+
+<div class="ui menu attached">
+    <div class="ui container">
+        <a class="item" href="{% url 'home' %}">Django Anúncios</a>
+        <div class="right menu">
+            <a class="item">Sign Up</a>
+            <a class="item">Sign In</a>
+        </div>
+    </div>
+</div>
+
+<div class="ui hidden divider"></div>
+
+<div class="ui container">
+    <div class="ui stackable grid">
+        <div class="four wide column">
+            <div class="ui vertical fluid menu">
+                {% for categoria in categorias %}
+                <a href="{% url 'categoria' categoria.id %}" class="item">
+                    {{ categoria }}
+                </a>
+                {% empty %}
+                <h2>Não há categorias...</h2>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="twelve wide column">
+            {% if categoria %}
+            <h1>{{ categoria }}</h1>
+            {% endif %}
+            {% block conteudo %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>

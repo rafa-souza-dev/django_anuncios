@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block conteudo %}
+<div class="ui one column stackable grid">
+    <div class="column">
+        <h1>{{ anuncio.titulo }}</h1>
+        <h3>{{ anuncio.criado_em }}</h3>
+        <div class="ui fluid card">
+            <div class="image">
+                <img src="{% static 'anuncios/img/vazio.png' %}">
+            </div>
+            <div class="content">
+                <a class="header">{{ anuncio.titulo }}</a>
+                <div class="description">
+                    {{ anuncio.descricao }}
+                </div>
+            </div>
+            <div class="extra content">
+                {{ anuncio.preco }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block conteudo %}
+<div class="ui three column stackable grid">
+    {% for anuncio in ultimos_anuncios %}
+    <div class="column">
+        <div class="ui fluid card">
+            <div class="image">
+                <img src="{% static 'anuncios/img/vazio.png' %}">
+            </div>
+            <div class="content">
+                <a href="{% url 'anuncio' anuncio.id %}" class="header">{{ anuncio.titulo }}</a>
+            </div>
+            <div class="extra content">
+                {{ anuncio.preco }}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <h1>Nenhum anúncio cadastrado.</h1>
+    {% endfor %}
+</div>
+{% endblock %}
