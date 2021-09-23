@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'anuncios/base.html' %}
 {% load static %}
 {% block conteudo %}
 <div class="ui three column stackable grid">
@@ -12,7 +12,7 @@
                 <a href="{% url 'anuncio' anuncio.id %}" class="header">{{ anuncio.titulo }}</a>
             </div>
             <div class="extra content">
-                {{ anuncio.preco }}
+                R$ {{ anuncio.preco }}
             </div>
         </div>
     </div>

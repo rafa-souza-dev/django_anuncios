@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'anuncios/base.html' %}
 {% load static %}
 
 {% block conteudo %}
@@ -8,7 +8,7 @@
         <h3>{{ anuncio.criado_em }}</h3>
         <div class="ui fluid card">
             <div class="image">
-                <img src="{% static 'anuncios/img/vazio.png' %}">
+                <img src="{% static 'anuncios/img/vazio.png' %}" >
             </div>
             <div class="content">
                 <a class="header">{{ anuncio.titulo }}</a>
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="extra content">
-                {{ anuncio.preco }}
+                R$ {{ anuncio.preco }}
             </div>
         </div>
     </div>

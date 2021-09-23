@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
     <link
-        rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous"
+            rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
     >
 </head>
 
@@ -22,8 +22,33 @@
     <div class="ui container">
         <a class="item" href="{% url 'home' %}">Django Anúncios</a>
         <div class="right menu">
+            {% if request.user.is_authenticated %}
+            <div class="ui fluid menu">
+
+                <a class="item" href="{% url 'cadastrar-anuncio' %}">
+                    <i class="volume up icon"></i>
+                    Anuncie
+                </a>
+            </div>
+            <div class="ui menu">
+                <div class="ui simple dropdown fluid item">
+                    <i class="user icon"></i>
+                    {{ request.user }}
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="{% url 'home' %}">
+                            Perfil
+                        </a>
+                        <a class="item" href="{% url 'logout' %}">
+                            Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
             <a class="item">Sign Up</a>
-            <a class="item">Sign In</a>
+            <a class="item" href="{% url 'login' %}">Sign In</a>
+            {% endif %}
         </div>
     </div>
 </div>
