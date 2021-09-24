@@ -1,0 +1,15 @@
+{% extends 'anuncios/base.html' %}
+{% load static %}
+
+{% block conteudo %}
+<h1>Página Inicial</h1>
+<hr>
+{% if user.perfil.nome_completo %}
+<h2>Bem vindo ao sistema, {{ user.perfil.nome_completo }}!</h2>
+<h5>Confira os <a href="{% url 'home' %}">últimos anúncios</a>.</h5>
+{% else %}
+<h5>Você precisa Completar o seu cadastro. Acesse os <a href="{% url 'atualizar-dados' %}">meus dados</a> para
+se atualizar.</h5>
+{% endif %}
+
+{% endblock %}

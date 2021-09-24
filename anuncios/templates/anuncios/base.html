@@ -26,7 +26,7 @@
             <div class="ui fluid menu">
 
                 <a class="item" href="{% url 'cadastrar-anuncio' %}">
-                    <i class="volume up icon"></i>
+                    <i class="bullhorn icon"></i>
                     Anuncie
                 </a>
             </div>
@@ -36,17 +36,42 @@
                     {{ request.user }}
                     <i class="dropdown icon"></i>
                     <div class="menu">
-                        <a class="item" href="{% url 'home' %}">
-                            Perfil
-                        </a>
-                        <a class="item" href="{% url 'logout' %}">
-                            Sair
-                        </a>
+                        {% if request.user.is_superuser %}
+                            <a class="item" href="{% url 'atualizar-dados' %}">
+                                Perfil
+                            </a>
+                            <a class="item" href="{% url 'cadastrar-categoria' %}">
+                                Cadastrar Categoria
+                            </a>
+                            <a class="item" href="{% url 'logout' %}">
+                                Sair
+                            </a>
+                        {% endif %}
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == 'Administrador' %}
+                                <a class="item" href="{% url 'atualizar-dados' %}">
+                                    Perfil
+                                </a>
+                                <a class="item" href="{% url 'cadastrar-categoria' %}">
+                                    Cadastrar Categoria
+                                </a>
+                                <a class="item" href="{% url 'logout' %}">
+                                    Sair
+                                </a>
+                            {% else %}
+                                <a class="item" href="{% url 'atualizar-dados' %}">
+                                    Perfil
+                                </a>
+                                <a class="item" href="{% url 'logout' %}">
+                                    Sair
+                                </a>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
             {% else %}
-            <a class="item">Sign Up</a>
+            <a class="item" href="{% url 'registrar' %}">Sign Up</a>
             <a class="item" href="{% url 'login' %}">Sign In</a>
             {% endif %}
         </div>
@@ -59,18 +84,20 @@
     <div class="ui stackable grid">
         <div class="four wide column">
             <div class="ui vertical fluid menu">
+                <a href="{% url 'tabela-anuncios' %}" class="item">
+                    Todos os Anúncios
+                </a>
                 {% for categoria in categorias %}
                 <a href="{% url 'categoria' categoria.id %}" class="item">
                     {{ categoria }}
                 </a>
-                {% empty %}
-                <h2>Não há categorias...</h2>
                 {% endfor %}
             </div>
         </div>
         <div class="twelve wide column">
             {% if categoria %}
             <h1>{{ categoria }}</h1>
+            <hr>
             {% endif %}
             {% block conteudo %}
             {% endblock %}

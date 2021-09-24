@@ -1,10 +1,13 @@
 {% extends 'anuncios/base.html' %}
 {% load static %}
 {% block conteudo %}
+
 <div class="ui three column stackable grid">
     {% for anuncio in ultimos_anuncios %}
     <div class="column">
         <div class="ui fluid card">
+            {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
             <div class="image">
                 <img src="{% static 'anuncios/img/vazio.png' %}">
             </div>
@@ -14,6 +17,77 @@
             <div class="extra content">
                 R$ {{ anuncio.preco }}
             </div>
+            <div class="extra content">
+                Por: {{ anuncio.usuario }}
+            </div>
+            <div class="extra content">
+                <a href="{% url 'editar-anuncio' anuncio.pk %}">
+                    <button class="mini ui yellow button">
+                        <i class="edit icon"></i>
+                    </button>
+                </a>
+                <a href="{% url 'excluir-anuncio' anuncio.pk %}">
+                    <button class="mini ui negative button">
+                        <i class="trash alternate icon"></i>
+                    </button>
+                </a>
+            </div>
+            {% endif %}
+            {% for group in request.user.groups.all %}
+            {% if group.name == 'Administrador' %}
+            <div class="image">
+                <img src="{% static 'anuncios/img/vazio.png' %}">
+            </div>
+            <div class="content">
+                <a href="{% url 'anuncio' anuncio.id %}" class="header">{{ anuncio.titulo }}</a>
+            </div>
+            <div class="extra content">
+                R$ {{ anuncio.preco }}
+            </div>
+            <div class="extra content">
+                Por: {{ anuncio.usuario }}
+            </div>
+            <div class="extra content">
+                <a href="{% url 'editar-anuncio' anuncio.pk %}">
+                    <button class="mini ui yellow button">
+                        <i class="edit icon"></i>
+                    </button>
+                </a>
+                <a href="{% url 'excluir-anuncio' anuncio.pk %}">
+                    <button class="mini ui negative button">
+                        <i class="trash alternate icon"></i>
+                    </button>
+                </a>
+            </div>
+            {% else %}
+            <div class="image">
+                <img src="{% static 'anuncios/img/vazio.png' %}">
+            </div>
+            <div class="content">
+                <a href="{% url 'anuncio' anuncio.id %}" class="header">{{ anuncio.titulo }}</a>
+            </div>
+            <div class="extra content">
+                R$ {{ anuncio.preco }}
+            </div>
+            <div class="extra content">
+                Por: {{ anuncio.usuario }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <div class="image">
+                <img src="{% static 'anuncios/img/vazio.png' %}">
+            </div>
+            <div class="content">
+                <a href="{% url 'anuncio' anuncio.id %}" class="header">{{ anuncio.titulo }}</a>
+            </div>
+            <div class="extra content">
+                R$ {{ anuncio.preco }}
+            </div>
+            <div class="extra content">
+                Por: {{ anuncio.usuario }}
+            </div>
+            {% endif %}
         </div>
     </div>
     {% empty %}

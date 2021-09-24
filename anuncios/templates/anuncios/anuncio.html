@@ -6,6 +6,7 @@
     <div class="column">
         <h1>{{ anuncio.titulo }}</h1>
         <h3>{{ anuncio.criado_em }}</h3>
+        <h3>Por: {{ anuncio.usuario }}</h3>
         <div class="ui fluid card">
             <div class="image">
                 <img src="{% static 'anuncios/img/vazio.png' %}" >

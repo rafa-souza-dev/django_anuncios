@@ -8,15 +8,15 @@
 <h3>Ação não permitida!</h3>
 
 {% else %}
-<h3>Autenticação</h3>
+<h3>{{ titulo }}</h3>
 
-<div class="ui card">
+<div class="ui {{ fluid }} card">
     <div class="ui container">
-        <hr>
         <form action="" method="post">
+            <hr>
             {% csrf_token %}
             {{ form|crispy }}
-            <button class="ui primary button">Entrar</button>
+            <button class="ui primary button">{{ texto }}</button>
             <hr>
         </form>
     </div>
