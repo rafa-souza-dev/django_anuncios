@@ -14,6 +14,7 @@
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
             crossorigin="anonymous"
     >
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/se/dt-1.11.3/datatables.min.css"/>
 </head>
 
 <body>
@@ -37,35 +38,35 @@
                     <i class="dropdown icon"></i>
                     <div class="menu">
                         {% if request.user.is_superuser %}
-                            <a class="item" href="{% url 'atualizar-dados' %}">
-                                Perfil
-                            </a>
-                            <a class="item" href="{% url 'cadastrar-categoria' %}">
-                                Cadastrar Categoria
-                            </a>
-                            <a class="item" href="{% url 'logout' %}">
-                                Sair
-                            </a>
+                        <a class="item" href="{% url 'atualizar-dados' %}">
+                            Perfil
+                        </a>
+                        <a class="item" href="{% url 'cadastrar-categoria' %}">
+                            Cadastrar Categoria
+                        </a>
+                        <a class="item" href="{% url 'logout' %}">
+                            Sair
+                        </a>
                         {% endif %}
                         {% for group in request.user.groups.all %}
-                            {% if group.name == 'Administrador' %}
-                                <a class="item" href="{% url 'atualizar-dados' %}">
-                                    Perfil
-                                </a>
-                                <a class="item" href="{% url 'cadastrar-categoria' %}">
-                                    Cadastrar Categoria
-                                </a>
-                                <a class="item" href="{% url 'logout' %}">
-                                    Sair
-                                </a>
-                            {% else %}
-                                <a class="item" href="{% url 'atualizar-dados' %}">
-                                    Perfil
-                                </a>
-                                <a class="item" href="{% url 'logout' %}">
-                                    Sair
-                                </a>
-                            {% endif %}
+                        {% if group.name == 'Administrador' %}
+                        <a class="item" href="{% url 'atualizar-dados' %}">
+                            Perfil
+                        </a>
+                        <a class="item" href="{% url 'cadastrar-categoria' %}">
+                            Cadastrar Categoria
+                        </a>
+                        <a class="item" href="{% url 'logout' %}">
+                            Sair
+                        </a>
+                        {% else %}
+                        <a class="item" href="{% url 'atualizar-dados' %}">
+                            Perfil
+                        </a>
+                        <a class="item" href="{% url 'logout' %}">
+                            Sair
+                        </a>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -104,6 +105,14 @@
         </div>
     </div>
 </div>
+
+<script src="{% static 'anuncios/js/jquery-3.5.1.min.js' %}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.11.3/datatables.min.js"></script>
+
+{% block scripts %}
+{% endblock %}
 
 
 </body>
