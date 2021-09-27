@@ -1,0 +1,1 @@
+web: gunicorn django_anuncios.wsgi  --log-file -
