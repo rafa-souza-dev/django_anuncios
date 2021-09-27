@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User, Group
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from anuncios.models import Categoria
 from .forms import UsuarioForm
@@ -55,12 +56,13 @@ class UsuarioCreate(CreateView):
         return context
 
 
-class PerfilUpdate(UpdateView):
+class PerfilUpdate(LoginRequiredMixin, UpdateView):
     template_name = "anuncios/form.html"
     model = Perfil
     fields = ['nome_completo', 'cpf', 'telefone']
     success_url = reverse_lazy('home2')
     extra_context = {'categorias': Categoria.objects.all()}
+    login_url = reverse_lazy('login')
 
     def get_object(self, queryset=None):
         self.object = get_object_or_404(Perfil, usuario=self.request.user)
