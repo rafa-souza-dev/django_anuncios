@@ -88,11 +88,13 @@
                 <a href="{% url 'tabela-anuncios' %}" class="item">
                     Todos os Anúncios
                 </a>
+                {% if categorias %}
                 {% for categoria in categorias %}
                 <a href="{% url 'categoria' categoria.id %}" class="item">
                     {{ categoria }}
                 </a>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
         <div class="twelve wide column">
