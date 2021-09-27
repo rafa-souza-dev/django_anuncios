@@ -31,7 +31,7 @@ class UsuarioCreate(CreateView):
     template_name = 'usuarios/login.html'
     form_class = UsuarioForm
     extra_context = {'categorias': Categoria.objects.all()}
-    success_url = reverse_lazy('home2')
+    success_url = reverse_lazy('login')
 
     def form_valid(self, form):
         grupo = get_object_or_404(Group, name="Anunciador")
